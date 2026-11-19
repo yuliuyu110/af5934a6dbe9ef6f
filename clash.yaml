@@ -1,0 +1,27 @@
+mode: rule
+log-level: info
+ipv6: false
+proxies:
+  - name: SG-Reality
+    type: vless
+    server: 137.184.251.71
+    port: 443
+    uuid: a2f439e5-2341-4800-b89f-8dbee847aaae
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    servername: www.microsoft.com
+    client-fingerprint: chrome
+    reality-opts:
+      public-key: HS55BsoSiAx8O4jQ62bGveOeiHE-lCL0MBzF53PpcEw
+      short-id: 7828ae15649e8106
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies: [SG-Reality, DIRECT]
+rules:
+  - GEOIP,private,DIRECT,no-resolve
+  - GEOSITE,cn,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,PROXY
